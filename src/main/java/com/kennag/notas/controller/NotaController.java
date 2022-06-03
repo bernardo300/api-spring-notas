@@ -21,21 +21,25 @@ import com.kennag.notas.model.Nota;
 import com.kennag.notas.service.NotaService;
 
 
+
 @RestController
-@RequestMapping("/notas")
+@RequestMapping("/")
 public class NotaController {
 
   @Autowired
   NotaService notaService;
 
+  
+  
+
   @ResponseBody
-  @GetMapping
+  @GetMapping("/notas")
   public List<Nota> busca(){
     return notaService.getAll();
   }
 
   @ResponseBody
-  @GetMapping("/{id}")
+  @GetMapping("/notas/{id}")
   public ResponseEntity<Nota> busca(@PathVariable("id") Long id){
     return notaService.getById(id);
   }
@@ -43,21 +47,21 @@ public class NotaController {
  
   @ResponseBody
   @Transactional
-  @PostMapping
+  @PostMapping("/notas")
   public Nota create(@RequestBody Nota nota){
     return notaService.create(nota);
   } 
 
   @ResponseBody
   @Transactional
-  @PutMapping("/{id}")
+  @PutMapping("/notas/{id}")
   public ResponseEntity<Nota> update(@RequestBody Nota nota, @PathVariable("id") Long id) throws Exception{
     return  notaService.update(nota, id);
   }
 
   @ResponseBody
   @Transactional
-  @DeleteMapping("/{id}")
+  @DeleteMapping("/notas/{id}")
   public void deletarNota(@PathVariable("id") Long id){
     notaService.delete(id);
   }
